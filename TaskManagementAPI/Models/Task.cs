@@ -11,13 +11,13 @@ public partial class Task
 
     public string? Details { get; set; }
 
-    public DateTime? DueDate { get; set; }
+    public DateTime? Due_Date { get; set; }
 
-    public string? FrequencyType { get; set; }
+    public string? Frequency_Type { get; set; }
 
-    public int? FrequencyNumber { get; set; }
+    public int? Frequency_Number { get; set; }
 
-    public bool? Sensative { get; set; }
+    public bool Sensative { get; set; }
 
-    public DateTime? LastCompleted { get; set; }
+    public DateTime? Last_Completed { get; set; }
 }
