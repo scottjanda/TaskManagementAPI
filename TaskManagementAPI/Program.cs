@@ -1,14 +1,24 @@
+using Azure.Core.Diagnostics;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using TaskManagementAPI.Config;
 using TaskManagementAPI.Models;
+using AzureEventSourceListener listener = AzureEventSourceListener.CreateConsoleLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-// Add DB context
-builder.Services.AddDbContext<TaskDbContext>(optionsBuilder =>
-    optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+//Azure Key Vault
+var vaultConfig = builder.Configuration.GetSection("KeyVault").Get<VaultConfiguration>();
+builder.Configuration.AddAzureKeyVault(new Uri(vaultConfig.Endpoint), new ClientSecretCredential(vaultConfig.TenantId, vaultConfig.ClientId, vaultConfig.ClientSecret));
+var DBConnectionString = builder.Configuration.GetConnectionString("TaskDBConnectionString");
+builder.Services.AddSingleton(DBConnectionString);
+builder.Services.AddDbContext<TaskDbContext>(options =>
+    options.UseSqlServer(DBConnectionString)
+);
 
 // Add Cors policy
 builder.Services.AddCors(
