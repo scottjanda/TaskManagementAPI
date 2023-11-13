@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'TaskAppSJAPI'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CEE562D9613446729358B1C887EE0E9C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A9C4F4B149BD4A03A1FEC120AD005008 }}
           package: .
