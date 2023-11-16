@@ -4,20 +4,16 @@ namespace TaskManagementAPI.Models
 {
     public partial class TaskDbContext : DbContext
     {
-        private string ConnectionString { get; }
+        public TaskDbContext()
+        {
+        }
 
-        public TaskDbContext(DbContextOptions<TaskDbContext> options, string connectionString)
+        public TaskDbContext(DbContextOptions<TaskDbContext> options)
             : base(options)
         {
-            ConnectionString = connectionString;
         }
 
         public virtual DbSet<Task> Tasks { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(ConnectionString);
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
