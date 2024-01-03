@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Web.Resource;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using TaskManagementAPI.Models;
 
 namespace TaskManagementAPI.Controllers
 {
+    [Authorize] //JWT access control
+    [RequiredScope("access_as_user")]
     [Route("api/[controller]")]
     [ApiController]
     public class TaskController : ControllerBase
