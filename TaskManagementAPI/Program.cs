@@ -1,8 +1,10 @@
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
-using TaskManagementAPI.Middleware;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TaskManagementAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,6 +65,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Require api key
-app.UseMiddleware<ApiKeyMiddleware>();
+//app.UseMiddleware<ApiKeyMiddleware>();
 
 app.Run();
